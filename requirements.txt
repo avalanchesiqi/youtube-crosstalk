@@ -2,3 +2,7 @@ requests
 beautifulsoup4
 tldextract
 tweepy
+numpy
+scipy
+matplotlib
+powerlaw
