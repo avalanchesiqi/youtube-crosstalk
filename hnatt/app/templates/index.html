@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+	<header>
+  	<meta charset="utf-8">
+		<title>HNATT demo</title>
+		<style>
+			body {
+				font-family: 'HelveticaNeue', 'Helvetica', 'Arial', sans-serif;
+				font-size: 18px;
+				margin: 0;
+				padding: 0;
+			}
+
+			ul {
+				list-style-type: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.container {
+				display: flex;
+				align-items: center;
+				position: relative;
+				flex-direction: column;
+				justify-content: center;
+				height: 100vh;
+				min-height: 640px;
+			}
+
+			.top-box, .bottom-box {
+				display: flex;
+				flex: 1 1;
+				height: 100%;
+				width: 100%;
+			}
+			.bottom-box {
+				border-top: 1px solid #eaeaea;
+			}
+			#text-input {
+				width: 100%;
+				height: 100%;
+				font-size: 18px;
+				outline: none;
+				border: none;
+				padding: 8px;
+				padding-bottom: 32px;
+				resize: none;
+				box-sizing: border-box;
+			}
+
+			.submit-btn {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				text-align: center;
+				background: black;
+				color: white;
+				padding: 8px;
+				font-size: 18px;
+				height: 48px;
+				width: 128px;
+				box-sizing: border-box;
+				border-radius: 120px;
+				transition: all 0.2s ease-out;
+			}
+			.submit-btn:hover {
+				background: #777;
+				/*color: black;*/
+				cursor: pointer;
+			}
+
+			.activation-map {
+				flex: 1 1;
+				padding: 8px;
+				padding-top: 32px;
+    		max-width: 100%;
+    		box-sizing: border-box;
+			}
+
+			#sentence-list li {
+				display: flex;
+				align-items: center;
+			}
+
+			.sentence {
+				padding-left: 32px;
+			}
+
+			.sentence-label {
+				width: 32px;
+				height: 22px;
+				display: inline-block;
+			}
+
+			.words-container {
+				width: 100%;
+			}
+
+			.word {
+				display: inline-block;
+				padding: 0 4px;
+			}
+
+			#prediction-container {
+				margin-top: 8px;
+				color: #555;
+			}
+		</style>
+	</header>	
+
+	<body>
+		<div class='container'>
+			<div class='top-box'>
+			<textarea id='text-input'
+				placeholder='Enter review text.'>they have some pretty interesting things here. i will definitely go back again.</textarea>
+			</div>
+			<div class='submit-btn' onclick='onClickSubmit()'>Run</div>
+			<div class='bottom-box'>
+				<div class='activation-map' id='activation-map'>
+					<ul id='sentence-list'></ul>
+				</div>
+			</div>	
+		</div>
+		<footer>
+			<script>
+				let xhttp = undefined;
+				if (window.XMLHttpRequest) {
+				    // code for modern browsers
+				    xhttp = new XMLHttpRequest();
+				 } else {
+				    // code for old IE browsers
+				    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+
+				let requestActivationMap = function(text, callback) {
+					xhttp.onreadystatechange = function() {
+					    if (this.readyState == 4 && this.status == 200) {
+					    	const data = JSON.parse(this.responseText);
+					      callback(data);
+					    }
+					};
+					xhttp.open("GET", "activations?text=" + text, true);
+					xhttp.send();
+				}
+
+				let onClickSubmit = function(event) {
+					let text = document.getElementById("text-input").value;
+					requestActivationMap(text, renderActivationMap);
+				}
+
+				let getSentenceColorForActivation = function(a) {
+					return `rgba(0, 0, 255, ${a})`;
+				}
+
+				let getWordColorForActivation = function(a) {
+					return `rgba(255, 0, 0, ${a})`;
+				}
+
+				let createSentenceElement = function(sa, words, originalWords) {
+					let sentenceElement = document.createElement("li");
+					sentenceElement.className	 = 'sentence'; 
+					sentenceElement.style.backgroundColor = getSentenceColorForActivation(sa);
+
+					let wordsContainer = document.createElement('div');
+					wordsContainer.className = 'words-container';
+					wordsContainer.style.backgroundColor = 'white';
+					let s_weight = Math.sqrt(sa);
+					for (let i = 0; i < words.length; i++) {
+						let a = words[i][1];
+						let w = originalWords[i]
+						wordsContainer.appendChild(createWordElement(w, a, s_weight));
+					}
+					wordsContainer.appendChild(createWordElement('.', 0, sa))
+					sentenceElement.appendChild(wordsContainer);
+
+					return sentenceElement;
+				}
+
+				let createWordElement = function(w, a, s_weight) {
+					let wordElement = document.createElement("div");
+					wordElement.className = 'word';
+					wordElement.style.backgroundColor = 
+						getWordColorForActivation(s_weight*a)
+					wordElement.innerHTML = w;
+					return wordElement;
+				}
+
+				let renderActivationMap = function(data) {
+					activations = data.activations;
+					normalizedText = data.normalizedText;
+					const sentenceList = document.getElementById('sentence-list');
+					while (sentenceList.firstChild) {
+						sentenceList.removeChild(sentenceList.firstChild);
+					}
+					let predictionContainer = document.getElementById('prediction-container');
+					if (predictionContainer) {
+						predictionContainer.remove();
+					}
+					for (let i = 0; i < activations.length; i++) {
+						let s = activations[i];
+						let words = s[0];
+						let originalWords = normalizedText[i].split(' ');
+						let sa = s[1];
+						sentenceList.appendChild(createSentenceElement(sa, words, originalWords))
+					}
+
+					renderPrediction(data.prediction, data.binary);
+				}
+
+				let renderPrediction = function(prediction, binary) {
+					let predictionContainer = document.createElement("div");
+					predictionContainer.id = "prediction-container";
+					prediction = Math.round(prediction);
+					let predictionText = 'Predicted leaning: ';
+					if (binary) {
+						let sentiment = 'Right-leaning';
+						if (prediction == 0) {
+							sentiment = 'Left-leaning';
+						}
+						predictionText += sentiment;
+					}
+					else {
+						predictionText += (prediction + 1) + ' out of 5 stars';
+					}
+					predictionContainer.innerHTML = predictionText;
+					document.getElementById("activation-map").appendChild(predictionContainer);
+				}
+
+			</script>
+		</footer>
+	</body>
+
+</html>
