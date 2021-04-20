@@ -4,7 +4,7 @@
 """ Plot PDFs of (a) comments per video; (b) CCDF of comments per user.
 
 Usage: python plot_fig3_data_profiling.py
-Input data files: ../tmp_data/video_meta.csv, ../tmp_data/polarized_user_comment_trace.csv.bz2
+Input data files: ../data/video_meta.csv, ../data/user_comment_meta.csv.bz2
 Output image file: ../images/fig3_profiling.pdf
 Time: ~1M
 """
@@ -29,18 +29,18 @@ def main():
 
     num_left_video_comment_list = []
     num_right_video_comment_list = []
-    with open('tmp_data/video_meta.csv', 'r') as fin:
+    with open('data/video_meta.csv', 'r') as fin:
         fin.readline()
         for line in fin:
-            _, leaning, _, _, num_comment_on_video, _ = line.rstrip().split(',', 5)
+            _, _, video_leaning, _, _, num_comment_on_video, _ = line.rstrip().split(',', 6)
             num_comment_on_video = int(num_comment_on_video)
-            if leaning == 'L':
+            if video_leaning == 'L':
                 num_left_video_comment_list.append(num_comment_on_video)
-            elif leaning == 'R':
+            elif video_leaning == 'R':
                 num_right_video_comment_list.append(num_comment_on_video)
 
     num_user_comment_list = []
-    with bz2.BZ2File('tmp_data/user_comment_trace.csv.bz2', mode='r') as fin:
+    with bz2.BZ2File('data/user_comment_meta.csv.bz2', mode='r') as fin:
         fin.readline()
         for line in fin:
             line = line.decode('utf-8')
@@ -105,12 +105,12 @@ def main():
 
     hide_spines(axes)
 
+    timer.stop()
+
     plt.tight_layout(rect=[0, 0.04, 1, 1])
     plt.savefig('images/fig3_profiling.pdf', bbox_inches='tight')
     if not platform.system() == 'Linux':
         plt.show()
-
-    timer.stop()
 
 
 if __name__ == '__main__':

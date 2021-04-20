@@ -1,10 +1,12 @@
-Code and Data for paper: Cross-Partisan Discussions on YouTube: Conservatives Talk to Liberals but Liberals Don't Talk to Conservatives (ICWSM '21)
-
-# Code and Data for YouTube Cross-Partisanship Discussions Study
+# Code and Data for YouTube Cross-Talk Study
 
 We release the code and data for the following paper.
-If you use these datasets, or refer to its results, please cite:
-> [Siqi Wu](https://avalanchesiqi.github.io/) and [Paul Resnick](https://www.si.umich.edu/people/paul-resnick). Cross-Partisan Discussions on YouTube: Conservatives Talk to Liberals but Liberals Don't Talk to Conservatives. *AAAI International Conference on Weblogs and Social Media (ICWSM)*, 2021. \[[paper](https://avalanchesiqi.github.io/files/cscw2019network.pdf)\]
+If you use these datasets, or refer to our findings, please cite:
+> [Siqi Wu](https://avalanchesiqi.github.io/) and [Paul Resnick](https://www.si.umich.edu/people/paul-resnick). Cross-Partisan Discussions on YouTube: Conservatives Talk to Liberals but Liberals Don't Talk to Conservatives. *AAAI International Conference on Weblogs and Social Media (ICWSM)*, 2021. \[[paper](https://avalanchesiqi.github.io/files/icwsm2021crosstalk.pdf)\]
+
+## Data
+The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KF5JC5).
+See more details in this [data description](/data/README.md).
 
 ## Code usage
 We provide three quickstart bash scripts:
@@ -21,7 +23,3 @@ Check the estimated running time in each python script before you run the quicks
 
 ## Python packages version
 All codes are developed and tested in Python 3.6.7, along with NumPy 1.14.5, matplotlib 3.0.3 and SciPy 1.2.1.
-
-## Data
-The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/TORICY).
-See more details in this [data description](/data/README.md).

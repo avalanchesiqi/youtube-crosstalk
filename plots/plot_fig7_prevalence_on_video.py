@@ -4,7 +4,7 @@
 """ How many cross-partisan comments do videos attract?
 
 Usage: python plot_fig7_prevalence_on_video.py
-Input data files: ../tmp_data/video_meta.csv
+Input data files: ../data/video_meta.csv
 Output image file: ../images/fig7_video_comment_dist.pdf
 Time: ~1M
 """
@@ -19,11 +19,6 @@ import matplotlib.pyplot as plt
 
 from utils.helper import Timer
 from utils.plot_conf import hide_spines, aaai_init_plot, ColorPalette
-
-
-def append_pct(freq_dist, pct_comment):
-    for i in range(len(freq_dist)):
-        freq_dist[i].append(pct_comment[i])
 
 
 def find_bin_idx(num_comment, thresholds):
@@ -51,11 +46,11 @@ def main():
     all_left = []
     all_right = []
 
-    with open('tmp_data/video_meta.csv', 'r') as fin:
+    with open('data/video_meta.csv', 'r') as fin:
         fin.readline()
         for line in fin:
-            _, media_leaning, _, num_view, num_comment, \
-                num_comment_from_left, num_comment_from_right, _ = line.rstrip().split(',')
+            _, _, video_leaning, _, num_view, num_comment, \
+                num_comment_from_left, num_comment_from_right, _ = line.rstrip().split(',', 8)
             num_view = int(num_view)
             num_comment = int(num_comment)
             num_comment_from_left = int(num_comment_from_left)
@@ -64,10 +59,10 @@ def main():
             if num_comment >= 10:
                 bin_idx = find_bin_idx(num_view, thresholds)
                 bin_stats[bin_idx] += 1
-                if media_leaning == 'L':
+                if video_leaning == 'L':
                     left_comment_dist[bin_idx].append(num_comment_from_right / num_comment * 100)
                     all_left.append(num_comment_from_right / num_comment)
-                elif media_leaning == 'R':
+                elif video_leaning == 'R':
                     right_comment_dist[bin_idx].append(num_comment_from_left / num_comment * 100)
                     all_right.append(num_comment_from_left / num_comment)
 
@@ -94,13 +89,13 @@ def main():
     axes[0].plot(thresholds, left_y_axis, '-o', c=ColorPalette.RIGHT_COLOR, ms=6)
     axes[0].plot(thresholds, left_25_y_axis, '--', c=ColorPalette.RIGHT_COLOR)
     axes[0].plot(thresholds, left_75_y_axis, '--', c=ColorPalette.RIGHT_COLOR)
-    axes[0].set_xlabel('#views on left videos')
+    axes[0].set_xlabel('#views on a video')
     axes[0].set_ylabel('%comments\nfrom conservatives')
 
     axes[1].plot(thresholds, right_y_axis, '-o', c=ColorPalette.LEFT_COLOR, ms=6)
     axes[1].plot(thresholds, right_25_y_axis, '--', c=ColorPalette.LEFT_COLOR)
     axes[1].plot(thresholds, right_75_y_axis, '--', c=ColorPalette.LEFT_COLOR)
-    axes[1].set_xlabel('#views on right videos')
+    axes[1].set_xlabel('#views on a video')
     axes[1].set_ylabel('%comments\nfrom liberals')
 
     for ax in axes:
@@ -110,8 +105,8 @@ def main():
         ax.set_xticks([1000, 10000, 100000, 1000000])
         ax.minorticks_off()
 
-    axes[0].set_title('(a)', pad=-2.9 * 72, y=1.0001)
-    axes[1].set_title('(b)', pad=-2.9 * 72, y=1.0001)
+    axes[0].set_title('(a) left-leaning', pad=-2.9 * 72, y=1.0001)
+    axes[1].set_title('(b) right-leaning', pad=-2.9 * 72, y=1.0001)
 
     hide_spines(axes)
 

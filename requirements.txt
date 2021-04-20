@@ -6,3 +6,6 @@ numpy
 scipy
 matplotlib
 powerlaw
+pandas
+seaborn
+pingouin

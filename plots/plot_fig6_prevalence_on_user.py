@@ -4,7 +4,7 @@
 """ How often do users post on opposing channels?
 
 Usage: python plot_fig6_prevalence_on_user.py
-Input data files: ../tmp_data/user_comment_trace.csv.bz2
+Input data files: ../data/user_comment_meta.csv.bz2
 Output image file: ../images/fig6_user_comment_dist.pdf
 Time: ~1M
 """
@@ -19,11 +19,6 @@ import matplotlib.pyplot as plt
 
 from utils.helper import Timer
 from utils.plot_conf import hide_spines, aaai_init_plot, ColorPalette
-
-
-def append_pct(freq_dist, pct_comment):
-    for i in range(len(freq_dist)):
-        freq_dist[i].append(pct_comment[i])
 
 
 def find_bin_idx(num_comment, thresholds):
@@ -54,24 +49,24 @@ def main():
     num_right = 0
     all_left = []
     all_right = []
-    with bz2.BZ2File('tmp_data/user_comment_trace.csv.bz2', 'r') as fin:
+    with bz2.BZ2File('data/user_comment_meta.csv.bz2', 'r') as fin:
         fin.readline()
         for line in fin:
             line = line.decode('utf-8')
-            user_id, pred_leaning, num_comment, num_comment_on_left, num_comment_on_right = line.rstrip().split(',')
+            user_id, user_leaning, num_comment, num_comment_on_left, num_comment_on_right = line.rstrip().split(',')
             num_comment = int(num_comment)
             num_comment_on_left = int(num_comment_on_left)
             num_comment_on_right = int(num_comment_on_right)
 
-            if num_comment >= 10 and pred_leaning != 'U':
+            if num_comment >= 10 and user_leaning != 'U':
                 bin_idx = find_bin_idx(num_comment, thresholds)
                 bin_stats[bin_idx] += 1
-                if pred_leaning == 'L':
+                if user_leaning == 'L':
                     num_left += 1
                     total_left_comment += num_comment
                     left_comment_dist[bin_idx].append(num_comment_on_right / num_comment * 100)
                     all_left.append(num_comment_on_right / num_comment)
-                elif pred_leaning == 'R':
+                elif user_leaning == 'R':
                     num_right += 1
                     total_right_comment += num_comment
                     right_comment_dist[bin_idx].append(num_comment_on_left / num_comment * 100)
@@ -104,13 +99,13 @@ def main():
     axes[0].plot(thresholds, left_y_axis, '-o', c=ColorPalette.RIGHT_COLOR, ms=6)
     axes[0].plot(thresholds, left_25_y_axis, '--', c=ColorPalette.RIGHT_COLOR)
     axes[0].plot(thresholds, left_75_y_axis, '--', c=ColorPalette.RIGHT_COLOR)
-    axes[0].set_xlabel('#comments from liberals')
+    axes[0].set_xlabel('#comments by a user')
     axes[0].set_ylabel('%comments\non right videos')
 
     axes[1].plot(thresholds, right_y_axis, '-o', c=ColorPalette.LEFT_COLOR, ms=6)
     axes[1].plot(thresholds, right_25_y_axis, '--', c=ColorPalette.LEFT_COLOR)
     axes[1].plot(thresholds, right_75_y_axis, '--', c=ColorPalette.LEFT_COLOR)
-    axes[1].set_xlabel('#comments from conservatives')
+    axes[1].set_xlabel('#comments by a user')
     axes[1].set_ylabel('%comments\non left videos')
 
     for ax in axes:
@@ -120,8 +115,8 @@ def main():
         ax.set_xticks([10, 100, 1000])
         ax.minorticks_off()
 
-    axes[0].set_title('(a)', pad=-2.9 * 72, y=1.0001)
-    axes[1].set_title('(b)', pad=-2.9 * 72, y=1.0001)
+    axes[0].set_title('(a) liberal', pad=-2.9 * 72, y=1.0001)
+    axes[1].set_title('(b) conservative', pad=-2.9 * 72, y=1.0001)
 
     hide_spines(axes)
 

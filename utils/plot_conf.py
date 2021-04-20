@@ -9,7 +9,7 @@ def aaai_init_plot(plt, profile='1x2'):
           'font.size': 16, 'xtick.labelsize': 16, 'ytick.labelsize': 16}
     plt.rcParams.update(rc)
     if profile == '1x1':
-        fig, ax = plt.subplots(1, 1, figsize=(10, 3.3))
+        fig, ax = plt.subplots(1, 1, figsize=(10, 4.2))
         return ax
     elif profile == '1x2':
         fig, axes = plt.subplots(1, 2, figsize=(10, 3.3))
