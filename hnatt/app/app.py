@@ -10,11 +10,11 @@ import tensorflow as tf
 from keras import backend as K
 
 from util import text_util
-from hnatt2 import HNATT
+from hnatt import HNATT
 
 SAVED_MODEL_DIR = 'saved_models'
-SAVED_MODEL_FILENAME = 'yt_model.h5'
-SAVED_TOKENIZER_FILENAME = 'yt_model.h5.tokenizer'
+SAVED_MODEL_FILENAME = 'cv1_hnatt_model.h5'
+SAVED_TOKENIZER_FILENAME = 'cv1_hnatt_model.h5.tokenizer'
 
 app = Flask(__name__)
 
@@ -42,8 +42,6 @@ def activations():
 		global graph
 		with graph.as_default():
 			activation_maps = h.activation_maps(text, websafe=True)
-			print(activation_maps)
-			print(text.split('.'))
 			preds = h.predict_text([text])[0]
 			print(preds)
 			prediction = np.argmax(preds).astype(float)

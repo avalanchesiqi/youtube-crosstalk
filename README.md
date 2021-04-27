@@ -21,7 +21,7 @@ The [prediction](/prediction) directory contains all scripts for estimating the 
 
 ## Pre-trained Hierarchical Attention Network (HAN)
 The [HAN model](/hnatt) we built was modified from the inspiring code from [hnatt](https://github.com/minqi/hnatt).
-See [this](/hnatt/README.md) for how to use our pre-trained HAN model for predicting user political leaning given a set of comments.
+See [this](/hnatt/README.md) for how to use our pre-trained HAN models for predicting user political leaning given a set of comments.
 
 ## Python version
 The HAN module was tested in Python 2.7.
