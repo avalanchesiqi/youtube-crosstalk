@@ -5,7 +5,7 @@ If you use these datasets, or refer to our findings, please cite:
 > [Siqi Wu](https://avalanchesiqi.github.io/) and [Paul Resnick](https://www.si.umich.edu/people/paul-resnick). Cross-Partisan Discussions on YouTube: Conservatives Talk to Liberals but Liberals Don't Talk to Conservatives. *AAAI International Conference on Weblogs and Social Media (ICWSM)*, 2021. \[[paper](https://avalanchesiqi.github.io/files/icwsm2021crosstalk.pdf)\]
 
 ## Data
-The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KF5JC5) or can be viewed on this Google [Sheet](https://docs.google.com/spreadsheets/d/1Hl-1-ryJEM9QLHAeBztMtq_dIEvm5dad0eZ4mAP8Y4s/edit?usp=sharing).
+The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KF5JC5).
 See more details in this [data description](/data/README.md).
 
 ## Plots

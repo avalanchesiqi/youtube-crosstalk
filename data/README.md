@@ -8,7 +8,7 @@ If you use these datasets, or refer to our findings, please cite:
 These datasets are collected via a series of scraping scripts, see [crawler](/crawler) for details.
 
 ## Data
-The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KF5JC5) or can be viewed on this Google [Sheet](https://docs.google.com/spreadsheets/d/1Hl-1-ryJEM9QLHAeBztMtq_dIEvm5dad0eZ4mAP8Y4s/edit?usp=sharing).
+The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KF5JC5).
 
 ### Content
 | filename | description |
@@ -22,6 +22,7 @@ The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?pe
 #### `us_partisan.csv`
 Metadata for 1,267 US partisan media on YouTube.
 The first row is header.
+It can be viewed on this [Google Sheet](https://docs.google.com/spreadsheets/d/1Hl-1-ryJEM9QLHAeBztMtq_dIEvm5dad0eZ4mAP8Y4s/edit?usp=sharing).
 Fields include 
 ```csv
 title, url, channel_title, channel_id, leaning, type, source, channel_description

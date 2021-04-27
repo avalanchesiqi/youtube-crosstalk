@@ -4,14 +4,14 @@
 """ Extract temporary data for public release.
 
 Usage: python extract_tmp_data.py
-Input data files: ../data/us_polarized_videos.json.bz2,
-                  ../data/us_partisan.csv
-                  ../hnatt/saved_models/unseen_hnatt_prediction.csv,
-                  ../prediction/all_seed_user_label.csv
-Output data files: ../data/video_meta.csv,
-                   ../data/hashed_user_ids.csv.bz2,
-                   ../data/user_comment_meta.csv.bz2,
-                   ../data/user_comment_trace.csv.bz2
+Input data files: data/us_polarized_videos.json.bz2,
+                  data/us_partisan.csv
+                  hnatt/saved_models/unseen_hnatt_prediction.csv,
+                  prediction/all_seed_user_label.csv
+Output data files: data/video_meta.csv,
+                   data/hashed_user_ids.csv.bz2,
+                   data/user_comment_meta.csv.bz2,
+                   data/user_comment_trace.csv.bz2
 Time: 1H
 """
 
