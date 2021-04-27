@@ -4,13 +4,14 @@
 """ Fetching YouTube video metadata given a video id.
 Feature set: vid, title, channel_id, keywords, category, description, duration, publish_date, snapshot_pt_time, view_count, num_like, num_dislike, transcript, num_comment, comment_list
 
-Usage: python 10_scrape_youtube_video_metadata.py
-Input data files: ../data/mbfc/to_crawl_vid.csv
-Output data files: ../data/mbfc/crawled_video_metadata.json
+Usage: python 9_scrape_youtube_video_metadata.py
+Input data files: data/mbfc/to_crawl_vid.csv
+Output data files: data/mbfc/crawled_video_metadata.json
 Time: ~1D
 """
 
 import up  # go to root folder
+
 import os, time, json, requests, re, random, bz2, codecs
 from datetime import datetime
 from pytz import timezone

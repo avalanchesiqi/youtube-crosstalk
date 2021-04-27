@@ -4,8 +4,8 @@
 """ How many cross-partisan comments do videos attract?
 
 Usage: python plot_fig7_prevalence_on_video.py
-Input data files: ../data/video_meta.csv
-Output image file: ../images/fig7_video_comment_dist.pdf
+Input data files: data/video_meta.csv
+Output image file: images/fig7_video_comment_dist.pdf
 Time: ~1M
 """
 

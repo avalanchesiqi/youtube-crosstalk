@@ -6,18 +6,20 @@ You need review the media with low similarity or redirected url, looking for log
 +++ Twitter handle to be reviewed: petergrier 0.2105
 
 Usage: python 3_scrape_media_website.py
-Input data files: ../data/mbfc/mbfc_ratings_v2.csv
-Output data files: ../data/mbfc/mbfc_ratings_v3.csv
+Input data files: data/mbfc/mbfc_ratings_v2.csv
+Output data files: data/mbfc/mbfc_ratings_v3.csv
 Time: 2H for MBFC
 """
 
 import up  # go to root folder
-import time, requests, re, json, random, tldextract
+
+import time, requests, re, random, tldextract
 from collections import defaultdict
 from difflib import SequenceMatcher
 from bs4 import BeautifulSoup
 from tweepy import OAuthHandler, API
 
+import conf.local_conf as conf
 from utils.helper import Timer
 from utils.crawlers import USER_AGENT_LIST, YOUTUBE_CHANNEL_ABOUT, YOUTUBE_USER_ABOUT
 from utils.crawlers import get_domain, match_website_on_twitter_page, match_links_on_youtube_page
@@ -156,14 +158,10 @@ def main():
     timer = Timer()
     timer.start()
 
-    with open('../conf/developer.key', 'r') as fin:
-        key_dict = json.load(fin)
-
-    key_idx = 20
-    consumer_key = key_dict['key{0}'.format(key_idx)]['consumer_key']
-    consumer_secret = key_dict['key{0}'.format(key_idx)]['consumer_secret']
-    access_token = key_dict['key{0}'.format(key_idx)]['access_token']
-    access_token_secret = key_dict['key{0}'.format(key_idx)]['access_secret']
+    consumer_key = conf.twitter_consumer_key
+    consumer_secret = conf.twitter_consumer_secret
+    access_token = conf.twitter_access_token
+    access_token_secret = conf.twitter_access_secret
 
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)

@@ -4,8 +4,8 @@
 """ How often do users post on opposing channels?
 
 Usage: python plot_fig6_prevalence_on_user.py
-Input data files: ../data/user_comment_meta.csv.bz2
-Output image file: ../images/fig6_user_comment_dist.pdf
+Input data files: data/user_comment_meta.csv.bz2
+Output image file: images/fig6_user_comment_dist.pdf
 Time: ~1M
 """
 

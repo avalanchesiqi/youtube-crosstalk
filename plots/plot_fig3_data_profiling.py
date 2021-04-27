@@ -4,8 +4,8 @@
 """ Plot PDFs of (a) comments per video; (b) CCDF of comments per user.
 
 Usage: python plot_fig3_data_profiling.py
-Input data files: ../data/video_meta.csv, ../data/user_comment_meta.csv.bz2
-Output image file: ../images/fig3_profiling.pdf
+Input data files: data/video_meta.csv, data/user_comment_meta.csv.bz2
+Output image file: images/fig3_profiling.pdf
 Time: ~1M
 """
 

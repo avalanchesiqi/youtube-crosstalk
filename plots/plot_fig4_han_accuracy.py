@@ -4,8 +4,8 @@
 """ Plot HAN classification results for 162K seed users.
 
 Usage: python plot_fig4_han_accuracy.py
-Input data files: ../hnatt/saved_models/hashed_cv[12345]_hnatt_prediction.json
-Output image file: ../images/fig4_prediction_han.pdf
+Input data files: hnatt/saved_models/hashed_cv[12345]_hnatt_prediction.json
+Output image file: images/fig4_prediction_han.pdf
 Time: ~1M
 """
 

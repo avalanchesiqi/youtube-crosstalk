@@ -4,12 +4,13 @@
 """ Keeping video ids if they are uploaded between 2020-01-01 and 2020-08-31.
 
 Usage: python 8_filter_by_video_upload_time.py
-Input data files: ../data/mbfc/mbfc_video_ids_2020-09-27.json
-Output data files: ../data/mbfc/mbfc_video_ids_jan_aug.json
+Input data files: data/mbfc/mbfc_video_ids_2020-09-27.json
+Output data files: data/mbfc/mbfc_video_ids_jan_aug.json
 Time: ~6H
 """
 
 import up  # go to root folder
+
 import os, time, json, requests, random
 
 from utils.helper import Timer

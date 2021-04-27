@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-""" Searching for the unresolved YouTube channels by sending search requests to YouTube.
+""" Searching for the unresolved YouTube channels by searching site title on YouTube.
 
 Usage: python 5_search_youtube_channel.py
-Input data files: ../data/mbfc/mbfc_ratings_v4.csv
-Output data files: ../data/mbfc/mbfc_ratings_v5.csv
+Input data files: .data/mbfc/mbfc_ratings_v4.csv
+Output data files: data/mbfc/mbfc_ratings_v5.csv
 Time: 20M for MBFC
 """
 
 import up  # go to root folder
+
 import time, requests, random, json
 
 from utils.helper import Timer
 from utils.crawlers import USER_AGENT_LIST, YOUTUBE_CHANNEL_ABOUT
-from utils.crawlers import find_value, search_dict, get_search_request, \
-    match_links_on_youtube_page
+from utils.crawlers import find_value, search_dict, get_search_request, match_links_on_youtube_page
 
 
 def main():
@@ -28,8 +28,8 @@ def main():
     num_fail_youtube = 0
     num_search = 0
 
-    with open('data/{0}/{0}_ratings_v7_new.csv'.format(app_name), 'w') as fout:
-        with open('data/{0}/{0}_ratings_v6_new.csv'.format(app_name), 'r') as fin:
+    with open('data/{0}/{0}_ratings_v5.csv'.format(app_name), 'w') as fout:
+        with open('data/{0}/{0}_ratings_v4.csv'.format(app_name), 'r') as fin:
             fout.write(fin.readline())
             for line in fin:
                 title, tail = line.rstrip().split(',', 1)

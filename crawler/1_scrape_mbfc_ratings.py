@@ -6,10 +6,11 @@ https://mediabiasfactcheck.com/{page}
 page = [left,leftcenter,center,right-center,right,fake-news]
 
 Usage: python 1_scrape_mbfc_ratings.py
-Output data files: ../data/mbfc/mbfc_ratings_v1.csv
+Output data files: data/mbfc/mbfc_ratings_v1.csv
 """
 
 import up  # go to root folder
+
 import time, requests, re
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup

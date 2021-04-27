@@ -4,8 +4,8 @@
 """ Bias in YouTube’s Comment Sorting.
 
 Usage: python plot_fig9_position_bias.py
-Input data files: ../data/video_meta.csv
-Output image file: ../images/fig9_position_bias.pdf
+Input data files: data/video_meta.csv
+Output image file: images/fig9_position_bias.pdf
 Time: ~4M
 """
 

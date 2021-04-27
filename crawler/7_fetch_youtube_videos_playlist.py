@@ -4,12 +4,13 @@
 """ Fetching YouTube videos given a channel id.
 
 Usage: python 7_fetch_youtube_videos_playlist.py
-Input data files: ../data/mbfc/mbfc_ratings.csv
-Output data files: ../data/mbfc/mbfc_video_ids_{date}.json
+Input data files: data/mbfc/mbfc_ratings.csv
+Output data files: data/mbfc/mbfc_video_ids_{date}.json
 Time: ~1D for MBFC
 """
 
 import up  # go to root folder
+
 import os, json
 from datetime import datetime
 

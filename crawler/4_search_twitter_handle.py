@@ -4,16 +4,18 @@
 """ Searching for the unresolved Twitter accounts by querying Twitter search API with media titles.
 
 Usage: python 4_search_twitter_handle.py
-Input data files: ../conf/developer.key, ../data/mbfc/mbfc_ratings_v3.csv
-Output data files: ../data/mbfc/mbfc_ratings_v4.csv
+Input data files: data/mbfc/mbfc_ratings_v3.csv
+Output data files: data/mbfc/mbfc_ratings_v4.csv
 Time: 40M for MBFC
 """
 
 import up  # go to root folder
-import json, tldextract
+
+import tldextract
 from difflib import SequenceMatcher
 from tweepy import OAuthHandler, API
 
+import conf.local_conf as conf
 from utils.helper import Timer
 from utils.crawlers import get_domain, match_website_on_twitter_page
 
@@ -22,14 +24,10 @@ def main():
     timer = Timer()
     timer.start()
 
-    with open('../conf/developer.key', 'r') as fin:
-        key_dict = json.load(fin)
-
-    key_idx = 21
-    consumer_key = key_dict['key{0}'.format(key_idx)]['consumer_key']
-    consumer_secret = key_dict['key{0}'.format(key_idx)]['consumer_secret']
-    access_token = key_dict['key{0}'.format(key_idx)]['access_token']
-    access_token_secret = key_dict['key{0}'.format(key_idx)]['access_secret']
+    consumer_key = conf.twitter_consumer_key
+    consumer_secret = conf.twitter_consumer_secret
+    access_token = conf.twitter_access_token
+    access_token_secret = conf.twitter_access_secret
 
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)

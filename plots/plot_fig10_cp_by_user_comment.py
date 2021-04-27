@@ -5,8 +5,8 @@
 varying by the number of comments they posted.
 
 Usage: python plot_fig10_cp_by_user_comment.py
-Input data files: ../data/user_comment_trace.csv.bz2
-Output image file: ../images/fig10_cp_by_user_comment.pdf
+Input data files: data/user_comment_trace.csv.bz2
+Output image file: images/fig10_cp_by_user_comment.pdf
 Time: ~1M
 """
 

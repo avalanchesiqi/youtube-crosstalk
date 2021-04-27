@@ -4,11 +4,12 @@
 """ Fetching user description and subscriptions given a channel id.
 
 Usage: python 11_scrape_youtube_subscriptions.py
-Input data files: ../data/mbfc/to_crawl_users.csv
-Output data files: ../data/mbfc/mbfc_usa_active_user_subscription.json.bz2
+Input data files: data/mbfc/to_crawl_users.csv
+Output data files: data/mbfc/active_user_subscription.json.bz2
 """
 
 import up  # go to root folder
+
 import os, json, bz2, time
 
 from utils.helper import Timer

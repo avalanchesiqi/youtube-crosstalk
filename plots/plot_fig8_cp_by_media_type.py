@@ -4,8 +4,8 @@
 """ Which media types attract more cross-partisan comments?
 
 Usage: python plot_fig8_cp_by_media_type.py
-Input data files: ../data/video_meta.csv
-Output image file: ../images/fig8_cp_by_media_type.pdf
+Input data files: data/video_meta.csv
+Output image file: images/fig8_cp_by_media_type.pdf
 Time: ~1M
 """
 

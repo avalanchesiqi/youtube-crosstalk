@@ -8,11 +8,12 @@ When the script is completed, manually address conflict by examining the OrigURL
 The OrigURL column should be removed after conflict solved.
 
 Usage: python 2_replace_with_redirected_urls.py
-Input data files: ../data/mbfc/mbfc_ratings_v1.csv
-Output data files: ../data/mbfc/mbfc_ratings_v2.csv
+Input data files: data/mbfc/mbfc_ratings_v1.csv
+Output data files: data/mbfc/mbfc_ratings_v2.csv
 """
 
 import up  # go to root folder
+
 import requests, random
 
 from utils.crawlers import USER_AGENT_LIST

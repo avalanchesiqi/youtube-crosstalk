@@ -5,21 +5,25 @@ If you use these datasets, or refer to our findings, please cite:
 > [Siqi Wu](https://avalanchesiqi.github.io/) and [Paul Resnick](https://www.si.umich.edu/people/paul-resnick). Cross-Partisan Discussions on YouTube: Conservatives Talk to Liberals but Liberals Don't Talk to Conservatives. *AAAI International Conference on Weblogs and Social Media (ICWSM)*, 2021. \[[paper](https://avalanchesiqi.github.io/files/icwsm2021crosstalk.pdf)\]
 
 ## Data
-The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KF5JC5).
+The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KF5JC5) or can be viewed on this Google [Sheet](https://docs.google.com/spreadsheets/d/1Hl-1-ryJEM9QLHAeBztMtq_dIEvm5dad0eZ4mAP8Y4s/edit?usp=sharing).
 See more details in this [data description](/data/README.md).
 
-## Code usage
-We provide three quickstart bash scripts:
-1. [run_all_wrangling.sh](/wrangling/run_all_wrangling.sh)
-2. [run_all_measures.sh](/measures/run_all_measures.sh)
-3. [run_all_models.sh](/models/run_all_models.sh)
+## Plots
+Plots reported in the paper can be reproduced by the scripts in [plots](/plots) directory, 
+with the aggregate video/user data we provide in [data](/data) directory as input files.
 
-Download and place data in the [data](/data) directory, then uncompress them.
-First run `run_all_wrangling.sh` to create formatted data, then run `run_all_temporal_analysis.sh` to conduct the temporal analysis or `run_all_predictors.sh` to reproduce the results of prediction tasks.
-Detailed usage and running time are documented in the corresponding python scripts.
+## Scrapers
+The [crawler](/crawler) directory contains all scripts for building our data collection pipeline.
+You will need to first copy [conf.py](/conf/conf.py) to [local_conf.py](/conf/local_conf.py), then set up the Twitter and YouTube credentials.
 
-Note the datasets are large, so the quickstart scripts will take up to 24 hours to finish.
-Check the estimated running time in each python script before you run the quickstart scripts.
+## Obtaining political leaning for seed users
+The [prediction](/prediction) directory contains all scripts for estimating the political leaning labels for seed users.
 
-## Python packages version
-All codes are developed and tested in Python 3.6.7, along with NumPy 1.14.5, matplotlib 3.0.3 and SciPy 1.2.1.
+## Pre-trained Hierarchical Attention Network (HAN)
+The [HAN model](/hnatt) we built was modified from the inspiring code from [hnatt](https://github.com/minqi/hnatt).
+See [this](/hnatt/README.md) for how to use our pre-trained HAN model for predicting user political leaning given a set of comments.
+
+## Python version
+The HAN module was tested in Python 2.7.
+Other than that, all other codes were developed and tested in Python 3.7.
+See more details in the [requirements.txt](/requirements.txt).

@@ -8,7 +8,7 @@ If you use these datasets, or refer to our findings, please cite:
 These datasets are collected via a series of scraping scripts, see [crawler](/crawler) for details.
 
 ## Data
-The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KF5JC5).
+The data is hosted on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KF5JC5) or can be viewed on this Google [Sheet](https://docs.google.com/spreadsheets/d/1Hl-1-ryJEM9QLHAeBztMtq_dIEvm5dad0eZ4mAP8Y4s/edit?usp=sharing).
 
 ## File Descriptions
 
@@ -21,7 +21,7 @@ title, url, channel_title, channel_id, leaning, type, source, channel_descriptio
 ```
 
 ### `video_meta.csv`
-Metadata for 274241 YouTube political videos from US partisan media.
+Metadata for 274,241 YouTube political videos from US partisan media.
 The first row is header.
 Fields include 
 ```csv
@@ -42,3 +42,9 @@ The first row is header.
 Fields include `hashed_user_id   predicted_user_leaning  comment_trace` (split by \t)
 `comment_trace` consists of 
 `channel_id1,num_comment_on_this_channel1;channel_id2,num_comment_on_this_channel2;...` (split by ;)
+
+For example, 
+```tsv
+99998   R       UCwWhs_6x42TyRM4Wstoq8HA,25;UCXIJgqnII2ZOINSWNOGFThA,20;UCWXPkK02j6MHW-4xCJzgMuw,17;UC-SJ6nODDmufqBzPBwCvYvQ,5;UCJg9wBPyKMNA5sRDnvzmkdg,2;UCupvZG-5ko_eiXAupbDfxWw,2;UCKgJEs_v0JB-6jWb8lIy9Xw,1;UCNZyLULUQBp5e9Q1cKtvk6Q,1;UCBi2mrWuNuyYy4gbM6fU18Q,1
+```
+It means user 99998 is predicted to lean conservative, they have posted 25 comments on `UCwWhs_6x42TyRM4Wstoq8HA`, 20 comments on `UCXIJgqnII2ZOINSWNOGFThA`, etc.

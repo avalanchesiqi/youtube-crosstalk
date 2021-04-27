@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-""" Fetching user description and subscriptions given a channel id.
+""" Fetching user featured channels given a channel id.
 
-Usage: python 12_scrape_youtube_featured_channels.py
-Input data files: ../data/mbfc_usa_active_user.csv
-Output data files: ../data/mbfc_usa_active_user_subscription.json.bz2
+Usage: python 11_scrape_youtube_featured_channels.py
+Input data files: data/mbfc/mbfc_ratings.csv
+Output data files: data/mbfc/MBFC_featured_channels.json
 """
 
 import up  # go to root folder
+
 import json, time
 
 from utils.helper import Timer
